@@ -1,0 +1,82 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
+    <div class="container-fluid">
+      <h2 style="padding-right: 5%;">Dealerships</h2>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" style="font-size: larger;" href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+   <!-- BANNER -->
+  <div class="banner mt-4">
+    <img src="https://images.pexels.com/photos/358070/pexels-photo-358070.jpeg" 
+         class="img-fluid" alt="Dealership">
+    <h2 class="small_header">Contact Our Dealership</h2>
+  </div>
+
+  <!-- CONTACT SECTION -->
+  <div class="container mt-4">
+    <div class="card p-4">
+
+      <h3 class="title">Get in Touch</h3>
+
+      <div class="row">
+        <!-- Contact Details -->
+        <div class="col-md-6 details">
+          <h4>Contact Information</h4>
+          <p><strong>Address:</strong> 123 AutoDrive Street, New York, USA</p>
+          <p><strong>Phone:</strong> +1 555 123 4567</p>
+          <p><strong>Email:</strong> contact@autodrive.com</p>
+          <p><strong>Business Hours:</strong><br>
+             Mon–Fri: 9:00 AM – 6:00 PM<br>
+             Sat: 10:00 AM – 4:00 PM</p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-md-6">
+          <form class="form_panel text-white">
+            <h4>Send Us a Message</h4>
+
+            <div class="mb-3">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" placeholder="Your name">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="Your email">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="4" placeholder="Write your message"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-60">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
