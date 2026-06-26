@@ -2,7 +2,6 @@
 from .restapis import get_request, analyze_review_sentiments
 from .models import CarMake, CarModel
 from .populate import initiate
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import JsonResponse
