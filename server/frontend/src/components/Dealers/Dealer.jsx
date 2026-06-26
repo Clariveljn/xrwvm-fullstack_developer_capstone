@@ -24,15 +24,28 @@ const Dealer = () => {
   let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
   let post_review = root_url+`postreview/${id}`;
   
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
+  const get_dealer = async () => {
+    try {
+      console.log("dealer_url =", dealer_url);
+
+      const res = await fetch(dealer_url, {
+          method: "GET"
+      });
+
+      console.log("status =", res.status);
+      console.log("url =", res.url);
+
+      // 1. Convertimos la respuesta a JSON
+      const retobj = await res.json();
+      console.log("respuesta =", retobj);
+
+      // 2. Guardamos los datos del dealer en el estado si la respuesta es correcta
+      if (retobj.status === 200 || res.status === 200) {
+        // Accedemos a retobj.dealer que es donde viene el objeto según tu consola
+        setDealer(retobj.dealer); 
+      }
+    } catch (error) {
+      console.error("Error obteniendo el dealer:", error);
     }
   }
 

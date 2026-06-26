@@ -4,7 +4,6 @@ import "./Dealers.css";
 import "../assets/style.css";
 import Header from '../Header/Header';
 
-
 const PostReview = () => {
   const [dealer, setDealer] = useState({});
   const [review, setReview] = useState("");
@@ -53,6 +52,7 @@ const PostReview = () => {
       headers: {
           "Content-Type": "application/json",
       },
+      credentials: "include",
       body: jsoninput,
   });
 
