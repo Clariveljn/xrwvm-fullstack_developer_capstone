@@ -1,6 +1,5 @@
 # Uncomment the required imports before adding the code
-from .restapis import get_request, analyze_review_sentiments, post_review
-
+from .restapis import get_request, analyze_review_sentiments
 from .models import CarMake, CarModel
 from .populate import initiate
 from django.shortcuts import render
@@ -35,9 +34,8 @@ def login_user(request):
         data = {"userName": username, "status": "Authenticated"}
     return JsonResponse(data)
 
+
 # Create a `logout_request` view to handle sign out request
-
-
 @csrf_exempt
 def logout_request(request):
     # Terminar la sesión del usuario
@@ -47,13 +45,10 @@ def logout_request(request):
     data = {"userName": ""}
     return JsonResponse(data)
 
+
 # Create a `registration` view to handle sign up request
-
-
 @csrf_exempt
 def registration(request):
-    #context = {}
-
     # Load JSON data from the request body
     data = json.loads(request.body)
     username = data['userName']
@@ -61,13 +56,12 @@ def registration(request):
     first_name = data['firstName']
     last_name = data['lastName']
     email = data['email']
-    #username_exist = False
-    email_exist = False
+    username_exist = False
     try:
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except Exception as e:
+    except Exception:
         # If not, simply log this is a new user
         logger.debug("{} is new user".format(username))
 
@@ -75,7 +69,7 @@ def registration(request):
     if not username_exist:
         # Create user in auth_user table
         user = User.objects.create_user(
-            username=username, first_name=first_name, last_name=last_name, 
+            username=username, first_name=first_name, last_name=last_name,
             password=password, email=email)
         # Login the user and redirect to list page
         login(request, user)
@@ -104,17 +98,17 @@ def get_cars(request):
     return JsonResponse({"CarModels": cars})
 
 
-# # Update the `get_dealerships` view to render the index page with
+# Update the `get_dealerships` view to render the index page with
 # a list of dealerships
 # def get_dealerships(request):
 # ...
-# Update the `get_dealerships` render list of dealerships all by default, 
-#particular state if state is passed
+# Update the `get_dealerships` render list of dealerships all by default,
+# particular state if state is passed
 def get_dealerships(request, state="All"):
     if (state == "All"):
         endpoint = "/fetchDealers"
     else:
-        endpoint = "/fetchDealers/"+state
+        endpoint = "/fetchDealers/" + state
     dealerships = get_request(endpoint)
     return JsonResponse({"status": 200, "dealers": dealerships})
 
@@ -125,7 +119,7 @@ def get_dealerships(request, state="All"):
 def get_dealer_reviews(request, dealer_id):
     # if dealer id has been provided
     if (dealer_id):
-        endpoint = "/fetchReviews/dealer/"+str(dealer_id)
+        endpoint = "/fetchReviews/dealer/" + str(dealer_id)
         reviews = get_request(endpoint)
         for review_detail in reviews:
             response = analyze_review_sentiments(review_detail['review'])
@@ -141,7 +135,7 @@ def get_dealer_reviews(request, dealer_id):
 # ...
 def get_dealer_details(request, dealer_id):
     if (dealer_id):
-        endpoint = "/fetchDealer/"+str(dealer_id)
+        endpoint = "/fetchDealer/" + str(dealer_id)
         dealership = get_request(endpoint)
         return JsonResponse({"status": 200, "dealer": dealership})
     else:
@@ -154,11 +148,9 @@ def get_dealer_details(request, dealer_id):
 @csrf_exempt
 def add_review(request):
     if (not request.user.is_anonymous):
-        data = json.loads(request.body)
         try:
-            #response = post_review(data)
             return JsonResponse({"status": 200})
-        except Exception as e:
+        except Exception:
             return JsonResponse({
                 "status": 401, "message": "Error in posting review"})
     else:
